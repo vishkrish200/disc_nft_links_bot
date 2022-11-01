@@ -72,7 +72,15 @@ client.on("messageCreate", async (message) => {
               : "https://play-lh.googleusercontent.com/ovFbGElmfBf5gqcNhKLDkNIMMf_54hJ02G6lNTQFYsmK4rqwBjKrbl24RiAPOLiVkdk"
           }`
         )
-        .addFields({ name: "Contract Address", value: `${message.content}` })
+        .addFields({
+          name: "Contract Address",
+          value: `${message.content}\n`,
+        })
+        .addFields({
+          name: "Contract Variables",
+          value:
+            "----------------------------------------------------------------------------",
+        })
         .setTimestamp()
         .setFooter({
           text: "by your fat mom",
@@ -85,6 +93,11 @@ client.on("messageCreate", async (message) => {
           value: `${item.value ? item.value : "empty  "}`,
           inline: true,
         });
+      });
+      embed.addFields({
+        name: "\u200B",
+        value:
+          "----------------------------------------------------------------------------",
       });
       embed
         .addFields({
