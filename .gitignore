@@ -3,3 +3,4 @@ node_modules
 app.yaml
 package-lock.json
 .vscode
+.gitignore
