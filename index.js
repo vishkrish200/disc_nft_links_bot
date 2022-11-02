@@ -3,8 +3,22 @@ import * as dotenv from "dotenv";
 import fetchVars from "./contractVars.js";
 import { ethers } from "ethers";
 import fetch from "node-fetch";
+import http from "http";
 
 dotenv.config();
+
+const hostname = "0.0.0.0";
+const port = 8080;
+
+const server = http.createServer((req, res) => {
+  res.statusCode = 200;
+  res.setHeader("Content-Type", "text/plain");
+  res.end("The server has started");
+});
+
+server.listen(port, hostname, () => {
+  console.log(`Server running at http://${hostname}:${port}/`);
+});
 
 const client = new Client({
   intents: [
@@ -32,6 +46,7 @@ client.on("messageCreate", async (message) => {
       );
       const data = await response.json();
       const os_collection_slug = data.collection?.slug;
+      // console.log(os_collection_slug);
       let collection_name = "";
       let collection_description = "";
       let collection_website = "";
@@ -51,7 +66,7 @@ client.on("messageCreate", async (message) => {
           : "";
       }
       const values = await fetchVars(contract_address);
-      //   console.log(values);
+      // console.log(values);
 
       const embed = new EmbedBuilder()
         .setColor(0x51ff00)
