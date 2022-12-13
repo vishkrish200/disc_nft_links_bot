@@ -16,7 +16,7 @@ export default async function fetchVars(caddress) {
   const abi_json = await abi.json();
 
   const data = JSON.parse(abi_json.result);
-  console.log(data);
+  // console.log(data);
 
   const emptyInputs = data.filter(
     (item) => item["inputs"]?.length === 0 && item.stateMutability === "view"

@@ -85,7 +85,7 @@ client.on("messageCreate", async (message) => {
         )
         .addFields({
           name: "Contract Address",
-          value: "`" + `${contract_address}` + "`",
+          value: `${contract_address}`,
         })
         .addFields({
           name: "Contract Variables",
@@ -101,7 +101,7 @@ client.on("messageCreate", async (message) => {
       values.forEach((item) => {
         embed.addFields({
           name: `${item.name ? item.name : "empty"}`,
-          value: "`" + `${item.value ? item.value : "empty  "}` + "`",
+          value: `${item.value ? item.value : "empty  "}`,
           inline: true,
         });
       });
