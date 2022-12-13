@@ -4,21 +4,22 @@ import fetchVars from "./contractVars.js";
 import { ethers } from "ethers";
 import fetch from "node-fetch";
 import http from "http";
+import { Alchemy, Utils } from "alchemy-sdk";
 
 dotenv.config();
 
-const hostname = "0.0.0.0";
-const port = 8080;
+// const hostname = "0.0.0.0";
+// const port = 8080;
 
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader("Content-Type", "text/plain");
-  res.end("The server has started");
-});
+// const server = http.createServer((req, res) => {
+//   res.statusCode = 200;
+//   res.setHeader("Content-Type", "text/plain");
+//   res.end("The server has started");
+// });
 
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
-});
+// server.listen(port, hostname, () => {
+//   console.log(`Server running at http://${hostname}:${port}/`);
+// });
 
 const client = new Client({
   intents: [
@@ -39,7 +40,6 @@ client.on("messageCreate", async (message) => {
         method: "GET",
         headers: { "X-API-KEY": process.env.OS_API_KEY },
       };
-      //   console.log(typeof message.content);
       const response = await fetch(
         `https://api.opensea.io/api/v1/asset_contract/${message.content}`,
         options
@@ -70,14 +70,10 @@ client.on("messageCreate", async (message) => {
 
       const embed = new EmbedBuilder()
         .setColor(0x51ff00)
-        .setTitle(
-          `${collection_name ? collection_name : "Does not have a name"}`
-        )
+        .setTitle(`${collection_name ? collection_name : "No Name"}`)
         .setDescription(
           `${
-            collection_description
-              ? collection_description
-              : "Does not have a description"
+            collection_description ? collection_description : "No Descriptino"
           }`
         )
         .setThumbnail(
@@ -89,12 +85,12 @@ client.on("messageCreate", async (message) => {
         )
         .addFields({
           name: "Contract Address",
-          value: `${message.content}\n`,
+          value: "`" + `${contract_address}` + "`",
         })
         .addFields({
           name: "Contract Variables",
           value:
-            "----------------------------------------------------------------------------",
+            "--------------------------------------------------------------------",
         })
         .setTimestamp()
         .setFooter({
@@ -105,14 +101,14 @@ client.on("messageCreate", async (message) => {
       values.forEach((item) => {
         embed.addFields({
           name: `${item.name ? item.name : "empty"}`,
-          value: `${item.value ? item.value : "empty  "}`,
+          value: "`" + `${item.value ? item.value : "empty  "}` + "`",
           inline: true,
         });
       });
       embed.addFields({
         name: "\u200B",
         value:
-          "----------------------------------------------------------------------------",
+          "--------------------------------------------------------------------",
       });
       embed
         .addFields({

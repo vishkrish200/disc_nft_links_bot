@@ -16,7 +16,7 @@ export default async function fetchVars(caddress) {
   const abi_json = await abi.json();
 
   const data = JSON.parse(abi_json.result);
-  //   console.log(data);
+  console.log(data);
 
   const emptyInputs = data.filter(
     (item) => item["inputs"]?.length === 0 && item.stateMutability === "view"
@@ -31,9 +31,18 @@ export default async function fetchVars(caddress) {
 
   const fetchedValues = await Promise.all(array);
 
-  const output = fetchedValues.map((output, index) => ({
-    name: `${emptyInputs[index].name}`,
-    value: `${output}`,
+  const outputs = fetchedValues.map((output, index) => ({
+    name: emptyInputs[index].name,
+    value: output,
   }));
-  return output;
+
+  outputs.map((output) => {
+    if (
+      output.name == "cost" ||
+      output.name == "price" ||
+      output.name == "costCheck"
+    )
+      output.value = ethers.utils.formatEther(parseInt(output.value)) + "E";
+  });
+  return outputs;
 }
