@@ -41,7 +41,7 @@ client.on("messageCreate", async (message) => {
         headers: { "X-API-KEY": process.env.OS_API_KEY },
       };
       const response = await fetch(
-        `https://api.opensea.io/api/v1/asset_contract/${message.content}`,
+        `https://api.opensea.io/api/v1/asset_contract/${contract_address}`,
         options
       );
       const data = await response.json();
@@ -85,7 +85,7 @@ client.on("messageCreate", async (message) => {
         )
         .addFields({
           name: "Contract Address",
-          value: `${contract_address}`,
+          value: "`" + `${contract_address}` + "`",
         })
         .addFields({
           name: "Contract Variables",
@@ -101,7 +101,7 @@ client.on("messageCreate", async (message) => {
       values.forEach((item) => {
         embed.addFields({
           name: `${item.name ? item.name : "empty"}`,
-          value: `${item.value ? item.value : "empty  "}`,
+          value: "`" + `${item.value ? item.value : "empty  "}` + "`",
           inline: true,
         });
       });
@@ -113,17 +113,9 @@ client.on("messageCreate", async (message) => {
       embed
         .addFields({
           name: `Links`,
-          value: ` [Etherscan](https://etherscan.io/address/${
-            message.content
-          }) | [NFTNerds](https://nftnerds.ai/collection/${
-            message.content
-          }/liveview) | [Blur](https://blur.io/collection/${
-            message.content
-          }) | [Opensea](https://opensea.io/collection/${
+          value: ` [Etherscan](https://etherscan.io/address/${contract_address}) | [NFTNerds](https://nftnerds.ai/collection/${contract_address}/liveview) | [Blur](https://blur.io/collection/${contract_address}) | [Opensea](https://opensea.io/collection/${
             os_collection_slug ? os_collection_slug : ""
-          }) | [X2Y2](https://x2y2.io/collection/${
-            message.content
-          }) | [Degenmint](https://degenmint.xyz/?address=${message.content})`,
+          }) | [X2Y2](https://x2y2.io/collection/${contract_address}) | [Degenmint](https://degenmint.xyz/?address=${contract_address}) | [AlphaSharks](https://v2-beta.alphasharks.io/collection/${contract_address})`,
         })
         .addFields({
           name: `Collection Links`,

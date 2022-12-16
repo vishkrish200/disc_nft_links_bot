@@ -37,10 +37,12 @@ export default async function fetchVars(caddress) {
   }));
 
   outputs.map((output) => {
+    console.log(output);
     if (
       output.name == "cost" ||
       output.name == "price" ||
-      output.name == "costCheck"
+      output.name == "costCheck" ||
+      (output.value._isBigNumber && output.value._hex > 0x186a0)
     )
       output.value = ethers.utils.formatEther(parseInt(output.value)) + "E";
   });
