@@ -19,12 +19,14 @@ const openseaData = async (contract_address) => {
     // console.log(os_collection_slug);
     let collection_name = "";
     let collection_description = "";
-    let collection_image = "";
+    let collection_image =
+      "https://play-lh.googleusercontent.com/ovFbGElmfBf5gqcNhKLDkNIMMf_54hJ02G6lNTQFYsmK4rqwBjKrbl24RiAPOLiVkdk";
     let collection_website = "";
     let collection_discord = "";
     let collection_twitter = "";
+    // console.log("url1" + data.image_url);
     if (os_collection_slug != null) {
-      collection_name = data.name ? data.name : "";
+      collection_name = data.name ? data.name : "\u200B";
       collection_description = data.description ? data.description : "\u200B";
       collection_image = data.image_url
         ? data.image_url
@@ -33,7 +35,7 @@ const openseaData = async (contract_address) => {
         ? data.collection.external_url
         : "";
       collection_discord = data.collection.discord_url
-        ? data.collection.external_url
+        ? data.collection.discord_url
         : "";
       collection_twitter = data.collection.twitter_username
         ? `https://twitter.com/${data.collection.twitter_username}`
@@ -48,10 +50,10 @@ const openseaData = async (contract_address) => {
       collection_discord: collection_discord,
       collection_twitter: collection_twitter,
     };
-    // console.log("os success");
+    console.log("os success");
     return opensea_json;
   } catch (error) {
-    // console.log("os failed");
+    console.log("os failed");
   }
 };
 
