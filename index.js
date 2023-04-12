@@ -39,7 +39,6 @@ client.on("messageCreate", async (message) => {
               ? opensea_json.collection_name
               : contract_name
           )
-          // .setDescription(`${opensea_json.collection_description}`)
           .setThumbnail(opensea_json.collection_image)
           .addFields({
             name: "Contract Address",
@@ -82,9 +81,9 @@ client.on("messageCreate", async (message) => {
         embed
           .addFields({
             name: `Links`,
-            value: ` [Etherscan](https://etherscan.io/address/${contract_address}) | [NFTNerds](https://nftnerds.ai/collection/${contract_address}/liveview) | [Blur](https://blur.io/collection/${contract_address}) | [Opensea](https://opensea.io/collection/${
+            value: ` [Etherscan](https://etherscan.io/address/${contract_address}) | [Deth](https://etherscan.deth.net/address/${contract_address}) | [NFTNerds](https://nftnerds.ai/collection/${contract_address}/liveview) | [Blur](https://blur.io/collection/${contract_address}) | [Opensea](https://opensea.io/collection/${
               opensea_json.slug ? opensea_json.slug : ""
-            }) | [X2Y2](https://x2y2.io/collection/${contract_address}) | [Degenmint](https://catchmint.xyz/?address=${contract_address}) | [AlphaSharks](https://v2-beta.alphasharks.io/collection/${contract_address}) | [mint.fun](https://mint.fun/${contract_address})`,
+            }) | [X2Y2](https://x2y2.io/collection/${contract_address}) | [Degenmint](https://catchmint.xyz/?address=${contract_address}) | [AlphaSharks](https://v2-beta.alphasharks.io/collection/${contract_address}) | [mint.fun](https://mint.fun/${contract_address}) | [NFTFlip](https://review.nftflip.ai/collection/${contract_address})`,
           })
           .addFields({
             name: `Collection Links`,
